@@ -1,0 +1,6 @@
+{
+  "exported_at": "2024-12-01T00:00:00",
+  "total_draws": 0,
+  "draws": [],
+  "_note": "This file is populated by the Python scraper: python main.py export --output ../frontend/src/data/lottery_data.json. The app uses built-in seed data (120 draws 2019-2023) as fallback when this file is empty."
+}
