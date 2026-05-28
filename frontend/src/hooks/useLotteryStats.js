@@ -119,6 +119,120 @@ function computePredictions2(draws, freqMap, gapMap, count = 5) {
     .slice(0, count)
 }
 
+// ── 6-digit prize1 prediction ────────────────────────────────────────────
+function computePredictions6(draws, preds3) {
+  const valid = draws.filter(d => d.prize1?.length === 6)
+  if (!valid.length) return { topDigits: [], candidates: [] }
+
+  // Per-position frequency
+  const posFreq = Array.from({ length: 6 }, () => {
+    const f = {}
+    for (let d = 0; d <= 9; d++) f[String(d)] = 0
+    return f
+  })
+  for (const draw of valid) {
+    for (let p = 0; p < 6; p++) posFreq[p][draw.prize1[p]]++
+  }
+
+  // Top 3 digits per position with percentage
+  const topDigits = posFreq.map((freq, pos) => {
+    const total = valid.length
+    return Object.entries(freq)
+      .filter(([d]) => pos === 0 ? d !== '0' : true)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([d, cnt]) => ({ d, cnt, pct: Math.round(cnt / total * 100) }))
+  })
+
+  const best = topDigits.map(td => td[0]?.d ?? '0')
+  const candidates = []
+
+  // Method 1: pure position frequency
+  candidates.push({
+    num: best.join(''),
+    method: 'ความถี่ตำแหน่ง',
+    color: '#e94560',
+    desc: 'เลขที่ออกบ่อยสุดในแต่ละหลัก',
+    src: Array(6).fill('freq'),
+  })
+
+  // Method 2: positions 0-2 frequency + top predicted last3_back
+  if (preds3.length > 0) {
+    const prefix = topDigits.slice(0, 3).map(td => td[0]?.d ?? '0').join('')
+    const num = prefix + preds3[0].num
+    if (num !== candidates[0].num) {
+      candidates.push({
+        num,
+        method: 'สัมพันธ์เลข 3 ตัว',
+        color: '#f5a623',
+        desc: '3 หลักหน้าจากความถี่, 3 หลักท้ายจากการทำนาย',
+        src: ['freq','freq','freq','pred3','pred3','pred3'],
+      })
+    }
+  }
+
+  // Method 3: second-best digit at positions where top has low dominance
+  const alt = topDigits.map((td, i) => {
+    const gap = (td[0]?.pct ?? 0) - (td[1]?.pct ?? 0)
+    return (gap < 5 && td[1]) ? td[1].d : (td[0]?.d ?? '0')
+  })
+  if (alt.join('') !== best.join('')) {
+    candidates.push({
+      num: alt.join(''),
+      method: 'หลักทางเลือก',
+      color: '#6c5ce7',
+      desc: 'ใช้เลขรองที่หลักซึ่งมีความต่างน้อยกว่า 5%',
+      src: alt.map((d, i) => d !== best[i] ? 'alt' : 'freq'),
+    })
+  }
+
+  // Method 4: adjust to hit historical average digit sum
+  const avgSum = valid
+    .map(d => d.prize1.split('').reduce((a, c) => a + Number(c), 0))
+    .reduce((a, b) => a + b, 0) / valid.length
+  const curSum = best.reduce((a, d) => a + Number(d), 0)
+  const diff = Math.round(avgSum) - curSum
+  if (diff !== 0) {
+    const adj = [...best]
+    let rem = diff
+    for (let p = 5; p >= 0 && rem !== 0; p--) {
+      const nv = Math.max(p === 0 ? 1 : 0, Math.min(9, Number(adj[p]) + rem))
+      rem -= nv - Number(adj[p])
+      adj[p] = String(nv)
+    }
+    if (adj.join('') !== best.join('')) {
+      candidates.push({
+        num: adj.join(''),
+        method: 'ผลรวมหลักเฉลี่ย',
+        color: '#00b894',
+        desc: `ปรับให้ผลรวมหลักใกล้ค่าเฉลี่ย ${Math.round(avgSum)} จุด`,
+        src: adj.map((d, i) => d !== best[i] ? 'sum' : 'freq'),
+      })
+    }
+  }
+
+  // Method 5: most frequent near-prize number (near1 repeated across draws)
+  const nearCnt = {}
+  for (const d of draws) {
+    if (d.near1_1) nearCnt[d.near1_1] = (nearCnt[d.near1_1] || 0) + 1
+    if (d.near1_2) nearCnt[d.near1_2] = (nearCnt[d.near1_2] || 0) + 1
+  }
+  const topNear = Object.entries(nearCnt)
+    .sort((a, b) => b[1] - a[1])
+    .find(([n]) => !candidates.find(c => c.num === n))
+  if (topNear && candidates.length < 5) {
+    candidates.push({
+      num: topNear[0],
+      method: 'เลขใกล้เคียงเดิม',
+      color: '#74b9ff',
+      desc: `ออกเป็นรางวัลใกล้เคียงที่ 1 บ่อยที่สุด (${topNear[1]} ครั้ง)`,
+      src: Array(6).fill('near'),
+    })
+  }
+
+  return { topDigits, candidates: candidates.slice(0, 5) }
+}
+
 // ── 3-digit prediction — 4 algorithms ───────────────────────────────────
 function computePredictions3(draws, top2Preds, count = 5) {
   if (!draws.length) return []
@@ -175,6 +289,7 @@ export function useLotteryStats(draws) {
       gapMap: {}, gap3Map: {},
       digitDist: Array(10).fill('0.0'),
       predictions: [], predictions3: [],
+      pred6: { topDigits: [], candidates: [] },
       lastSeen: {},
     }
     if (!draws?.length) return empty
@@ -209,13 +324,14 @@ export function useLotteryStats(draws) {
 
     const predictions  = computePredictions2(draws, frequencyMap, gapMap, 5)
     const predictions3 = computePredictions3(draws, predictions, 5)
+    const pred6        = computePredictions6(draws, predictions3)
 
     return {
       frequencyMap, freq3Map, freq3FrontMap,
       hotNumbers, coldNumbers,
       hot3Numbers, cold3Numbers,
       gapMap, gap3Map,
-      digitDist, predictions, predictions3, lastSeen,
+      digitDist, predictions, predictions3, pred6, lastSeen,
     }
   }, [draws])
 }
