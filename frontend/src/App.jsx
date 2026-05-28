@@ -56,6 +56,15 @@ export const fmtD = dateStr => {
   return `${d.getDate()} ${MO[d.getMonth()]} ${String(d.getFullYear() + 543).slice(-2)}`
 }
 
+export function nextDrawDate() {
+  const n = new Date()
+  const y = n.getFullYear(), mo = n.getMonth() + 1, d = n.getDate()
+  if (d < 16) return `${y}-${String(mo).padStart(2,'0')}-16`
+  const nm = mo === 12 ? 1 : mo + 1
+  const ny = mo === 12 ? y + 1 : y
+  return `${ny}-${String(nm).padStart(2,'0')}-01`
+}
+
 const TABS = [
   { id: 'overview',  label: 'ภาพรวม'   },
   { id: 'frequency', label: 'ความถี่'   },
@@ -119,7 +128,7 @@ function TopBar({ draws }) {
           { lbl: 'งวดที่วิเคราะห์', val: `${draws.length} งวด` },
           { lbl: 'เลขร้อน 🔥',      val: hot?.num  ?? '–', sub: hot  ? `${hot.count} ครั้ง`     : '' },
           { lbl: 'เลขเย็น ❄️',      val: cold?.num ?? '–', sub: cold ? `${cold.gap} งวดแล้ว` : '' },
-          { lbl: 'งวดถัดไป',        val: '1 มิ.ย. 69' },
+          { lbl: 'งวดถัดไป',        val: fmtD(nextDrawDate()) },
         ].map((p, i) => (
           <div key={i} style={{
             background: 'rgba(255,255,255,0.09)',
