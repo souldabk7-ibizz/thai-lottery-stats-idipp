@@ -27,6 +27,26 @@ function Ball({ n, type, count, delay }) {
   )
 }
 
+function Pill3({ n, type, count, delay }) {
+  const { T } = useT()
+  const hot = type === 'hot'
+  return (
+    <div className="ball" style={{ animationDelay: `${delay}ms`, textAlign: 'center', flex: '1 0 0' }}>
+      <div style={{
+        height: 44, borderRadius: 12, margin: '0 auto 5px',
+        background: hot
+          ? `linear-gradient(145deg,${T.accent},#b83050)`
+          : `linear-gradient(145deg,${T.purple},#4a3a9a)`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        color: '#fff', fontWeight: 700, fontSize: 15,
+        fontFamily: 'JetBrains Mono,monospace',
+        boxShadow: hot ? `0 4px 16px ${T.accent}45` : `0 4px 16px ${T.purple}45`,
+      }}>{n}</div>
+      <div style={{ fontSize: 10, color: T.muted }}>{hot ? `🔥 ${count}ครั้ง` : `❄️ ${count}งวด`}</div>
+    </div>
+  )
+}
+
 function SectionHead({ label, c1, c2 }) {
   const { T } = useT()
   return (
@@ -183,6 +203,30 @@ export default function Overview({ draws, stats }) {
           ))}
         </div>
       </div>
+
+      {/* 3-digit hot numbers */}
+      {stats.hot3Numbers.length > 0 && (
+        <div style={{ margin: '14px 14px 0' }}>
+          <SectionHead label="เลขท้าย 3 ตัวออกบ่อย 🔥" c1={T.accent} c2={T.purple} />
+          <div style={{ ...mkCard(T, { borderRadius: 18, padding: '16px 12px', display: 'flex', gap: 8 }) }}>
+            {stats.hot3Numbers.map((x, i) => (
+              <Pill3 key={x.num} n={x.num} type="hot" count={x.count} delay={i * 80} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 3-digit cold numbers */}
+      {stats.cold3Numbers.length > 0 && (
+        <div style={{ margin: '14px 14px 0' }}>
+          <SectionHead label="เลขท้าย 3 ตัวค้างนาน ❄️" c1={T.purple} c2={T.blue} />
+          <div style={{ ...mkCard(T, { borderRadius: 18, padding: '16px 12px', display: 'flex', gap: 8 }) }}>
+            {stats.cold3Numbers.map((x, i) => (
+              <Pill3 key={x.num} n={x.num} type="cold" count={x.gap} delay={i * 80} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Digit frequency chart */}
       <div style={{ ...mkCard(T, { borderRadius: 18, margin: '14px 14px 0', padding: '16px 16px 12px' }) }}>
