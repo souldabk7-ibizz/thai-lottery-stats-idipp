@@ -52,13 +52,13 @@ export default function History({ draws, stats }) {
                 ...(T.blur && T.blur !== 'none' ? { backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' } : {}),
               }}>{fmtD(d.date)}</div>
 
-              {/* Prize number */}
+              {/* Prize number — show full prize1, highlight last 2 digits of prize1 */}
               <div style={{ flex: 1, fontFamily: 'JetBrains Mono,monospace', fontSize: 16, fontWeight: 600 }}>
                 <span style={{ color: T.muted }}>{d.prize1 ? d.prize1.slice(0, 4) : '????'}</span>
                 <span style={{
                   color: T.accent, fontWeight: 800,
                   background: `${T.accent}14`, borderRadius: 4, padding: '0 2px',
-                }}>{d.last2 || d.prize1?.slice(-2) || '??'}</span>
+                }}>{d.prize1?.slice(-2) || '??'}</span>
               </div>
 
               {/* Badges */}
@@ -72,6 +72,12 @@ export default function History({ draws, stats }) {
                     background: `${T.accent}15`, border: `1px solid ${T.accent}30`, color: T.accent,
                     borderRadius: 7, padding: '3px 7px', fontSize: 10, fontWeight: 700,
                   }}>🔥 ร้อน</div>
+                )}
+                {d.last2 && (
+                  <div style={{
+                    background: `${T.green}15`, border: `1px solid ${T.green}30`, color: T.green,
+                    borderRadius: 7, padding: '3px 8px', fontSize: 10, fontWeight: 600,
+                  }} className="mono">ท้าย2: {d.last2}</div>
                 )}
                 {d.last3_back && (
                   <div style={{
