@@ -1,8 +1,348 @@
 {
-  "exported_at": "2025-05-28T00:00:00",
-  "total_draws": 419,
-  "source_note": "Real data from sanook.com via github.com/heart/Data-Set-Thai-Lotto",
+  "exported_at": "2026-05-29T00:00:00",
+  "total_draws": 453,
+  "source_note": "Real data: 419 draws (2006-2024) from heart/Data-Set-Thai-Lotto + 34 draws (2025-2026) from official sources",
   "draws": [
+    {
+      "date": "2026-05-16",
+      "prize1": "107387",
+      "last2": "08",
+      "last3_front": "298",
+      "last3_back": "602",
+      "near1_1": "107386",
+      "near1_2": "107388",
+      "source": "real"
+    },
+    {
+      "date": "2026-05-02",
+      "prize1": "536077",
+      "last2": "43",
+      "last3_front": "267",
+      "last3_back": "065",
+      "near1_1": "536076",
+      "near1_2": "536078",
+      "source": "real"
+    },
+    {
+      "date": "2026-04-16",
+      "prize1": "309612",
+      "last2": "77",
+      "last3_front": "355",
+      "last3_back": "868",
+      "near1_1": "309611",
+      "near1_2": "309613",
+      "source": "real"
+    },
+    {
+      "date": "2026-04-01",
+      "prize1": "292514",
+      "last2": "47",
+      "last3_front": "406",
+      "last3_back": "851",
+      "near1_1": "292513",
+      "near1_2": "292515",
+      "source": "real"
+    },
+    {
+      "date": "2026-03-16",
+      "prize1": "833009",
+      "last2": "64",
+      "last3_front": "510",
+      "last3_back": "439",
+      "near1_1": "833008",
+      "near1_2": "833010",
+      "source": "real"
+    },
+    {
+      "date": "2026-03-01",
+      "prize1": "820866",
+      "last2": "06",
+      "last3_front": "479",
+      "last3_back": "068",
+      "near1_1": "820865",
+      "near1_2": "820867",
+      "source": "real"
+    },
+    {
+      "date": "2026-02-16",
+      "prize1": "340563",
+      "last2": "07",
+      "last3_front": "527",
+      "last3_back": "578",
+      "near1_1": "340562",
+      "near1_2": "340564",
+      "source": "real"
+    },
+    {
+      "date": "2026-02-01",
+      "prize1": "174629",
+      "last2": "48",
+      "last3_front": "917",
+      "last3_back": "408",
+      "near1_1": "174628",
+      "near1_2": "174630",
+      "source": "real"
+    },
+    {
+      "date": "2026-01-17",
+      "prize1": "878972",
+      "last2": "02",
+      "last3_front": "299",
+      "last3_back": "662",
+      "near1_1": "878971",
+      "near1_2": "878973",
+      "source": "real"
+    },
+    {
+      "date": "2026-01-02",
+      "prize1": "837706",
+      "last2": "16",
+      "last3_front": "694",
+      "last3_back": "288",
+      "near1_1": "837705",
+      "near1_2": "837707",
+      "source": "real"
+    },
+    {
+      "date": "2025-12-16",
+      "prize1": "763895",
+      "last2": "52",
+      "last3_front": "431",
+      "last3_back": "014",
+      "near1_1": "763894",
+      "near1_2": "763896",
+      "source": "real"
+    },
+    {
+      "date": "2025-12-01",
+      "prize1": "461252",
+      "last2": "22",
+      "last3_front": "655",
+      "last3_back": "137",
+      "near1_1": "461251",
+      "near1_2": "461253",
+      "source": "real"
+    },
+    {
+      "date": "2025-11-16",
+      "prize1": "458145",
+      "last2": "37",
+      "last3_front": "602",
+      "last3_back": "389",
+      "near1_1": "458144",
+      "near1_2": "458146",
+      "source": "real"
+    },
+    {
+      "date": "2025-11-01",
+      "prize1": "345898",
+      "last2": "87",
+      "last3_front": "449",
+      "last3_back": "111",
+      "near1_1": "345897",
+      "near1_2": "345899",
+      "source": "real"
+    },
+    {
+      "date": "2025-10-16",
+      "prize1": "059696",
+      "last2": "61",
+      "last3_front": "955",
+      "last3_back": "889",
+      "near1_1": "999999",
+      "near1_2": "059697",
+      "source": "real"
+    },
+    {
+      "date": "2025-10-01",
+      "prize1": "876978",
+      "last2": "77",
+      "last3_front": "843",
+      "last3_back": "280",
+      "near1_1": "876977",
+      "near1_2": "876979",
+      "source": "real"
+    },
+    {
+      "date": "2025-09-16",
+      "prize1": "074646",
+      "last2": "58",
+      "last3_front": "740",
+      "last3_back": "308",
+      "near1_1": "999999",
+      "near1_2": "074647",
+      "source": "real"
+    },
+    {
+      "date": "2025-09-01",
+      "prize1": "506356",
+      "last2": "31",
+      "last3_front": "131",
+      "last3_back": "022",
+      "near1_1": "506355",
+      "near1_2": "506357",
+      "source": "real"
+    },
+    {
+      "date": "2025-08-16",
+      "prize1": "994865",
+      "last2": "63",
+      "last3_front": "602",
+      "last3_back": "834",
+      "near1_1": "994864",
+      "near1_2": "994866",
+      "source": "real"
+    },
+    {
+      "date": "2025-08-01",
+      "prize1": "811852",
+      "last2": "50",
+      "last3_front": "525",
+      "last3_back": "891",
+      "near1_1": "811851",
+      "near1_2": "811853",
+      "source": "real"
+    },
+    {
+      "date": "2025-07-16",
+      "prize1": "245324",
+      "last2": "26",
+      "last3_front": "995",
+      "last3_back": "084",
+      "near1_1": "245323",
+      "near1_2": "245325",
+      "source": "real"
+    },
+    {
+      "date": "2025-07-01",
+      "prize1": "949246",
+      "last2": "91",
+      "last3_front": "680",
+      "last3_back": "918",
+      "near1_1": "949245",
+      "near1_2": "949247",
+      "source": "real"
+    },
+    {
+      "date": "2025-06-16",
+      "prize1": "507392",
+      "last2": "06",
+      "last3_front": "243",
+      "last3_back": "299",
+      "near1_1": "507391",
+      "near1_2": "507393",
+      "source": "real"
+    },
+    {
+      "date": "2025-06-01",
+      "prize1": "559352",
+      "last2": "20",
+      "last3_front": "349",
+      "last3_back": "307",
+      "near1_1": "559351",
+      "near1_2": "559353",
+      "source": "real"
+    },
+    {
+      "date": "2025-05-16",
+      "prize1": "251309",
+      "last2": "87",
+      "last3_front": "109",
+      "last3_back": "965",
+      "near1_1": "251308",
+      "near1_2": "251310",
+      "source": "real"
+    },
+    {
+      "date": "2025-05-02",
+      "prize1": "213388",
+      "last2": "06",
+      "last3_front": "116",
+      "last3_back": "167",
+      "near1_1": "213387",
+      "near1_2": "213389",
+      "source": "real"
+    },
+    {
+      "date": "2025-04-16",
+      "prize1": "266227",
+      "last2": "85",
+      "last3_front": "413",
+      "last3_back": "474",
+      "near1_1": "266226",
+      "near1_2": "266228",
+      "source": "real"
+    },
+    {
+      "date": "2025-04-01",
+      "prize1": "669687",
+      "last2": "36",
+      "last3_front": "635",
+      "last3_back": "180",
+      "near1_1": "669686",
+      "near1_2": "669688",
+      "source": "real"
+    },
+    {
+      "date": "2025-03-16",
+      "prize1": "757563",
+      "last2": "32",
+      "last3_front": "595",
+      "last3_back": "457",
+      "near1_1": "757562",
+      "near1_2": "757564",
+      "source": "real"
+    },
+    {
+      "date": "2025-03-01",
+      "prize1": "818894",
+      "last2": "54",
+      "last3_front": "139",
+      "last3_back": "781",
+      "near1_1": "818893",
+      "near1_2": "818895",
+      "source": "real"
+    },
+    {
+      "date": "2025-02-16",
+      "prize1": "847377",
+      "last2": "50",
+      "last3_front": "268",
+      "last3_back": "652",
+      "near1_1": "847376",
+      "near1_2": "847378",
+      "source": "real"
+    },
+    {
+      "date": "2025-02-01",
+      "prize1": "558700",
+      "last2": "51",
+      "last3_front": "285",
+      "last3_back": "685",
+      "near1_1": "558699",
+      "near1_2": "558701",
+      "source": "real"
+    },
+    {
+      "date": "2025-01-17",
+      "prize1": "807779",
+      "last2": "23",
+      "last3_front": "961",
+      "last3_back": "448",
+      "near1_1": "807778",
+      "near1_2": "807780",
+      "source": "real"
+    },
+    {
+      "date": "2025-01-02",
+      "prize1": "730209",
+      "last2": "51",
+      "last3_front": "446",
+      "last3_back": "376",
+      "near1_1": "730208",
+      "near1_2": "730210",
+      "source": "real"
+    },
     {
       "date": "2024-12-16",
       "prize1": "097863",
